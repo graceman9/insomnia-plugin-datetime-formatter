@@ -1,0 +1,45 @@
+{
+  "name": "insomnia-plugin-datetime-formatter",
+  "version": "0.0.1",
+  "description": "Date/time formatter and offset plugin for Insomnia with timezone support (Moment.js)",
+  "main": "main.js",
+  "author": "Sergey Klochko",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/graceman9/insomnia-plugin-datetime-formatter"
+  },
+  "homepage": "https://github.com/graceman9/insomnia-plugin-datetime-formatter#readme",
+  "bugs": {
+    "url": "https://github.com/graceman9/insomnia-plugin-datetime-formatter/issues"
+  },
+  "keywords": [
+    "insomnia",
+    "plugin",
+    "datetime",
+    "date",
+    "time",
+    "momentjs",
+    "template-tag"
+  ],
+  "insomnia": {
+    "name": "datetime-formatter",
+    "displayName": "DateTime Formatter",
+    "description": "Format current date/time with optional offsets (years, months, days, hours, minutes, seconds) and timezone",
+    "images": {
+      "icon": "icon.svg"
+    },
+    "publisher": {
+      "name": "Sergey Klochko",
+      "icon": "https://github.com/graceman9.png"
+    },
+    "unlisted": false
+  },
+  "dependencies": {
+    "moment-timezone": "^0.5.45"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

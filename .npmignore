@@ -1,0 +1,21 @@
+# NPM files
+.npmignore
+package-lock.json
+
+# Development files
+test.js
+debug.js
+.nyc_output/
+coverage/
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Development dependencies
+.vscode/
+.idea/
+.git/
+.gitignore
+.DS_Store
