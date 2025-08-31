@@ -37,6 +37,7 @@
 - **Seconds**: Set to `45`, should add 45 seconds
 - **Format**: Try different Moment.js formats
 - **Timezone**: Test different timezones
+- **Input**: Provide Unix seconds/ms or ISO string to format a specific timestamp
 
 #### Negative Values
 - Set **Hours** to `-2` (should subtract 2 hours)
@@ -72,6 +73,21 @@ Expected: `January 15th 2025, 2:30:45 pm`
 {{ datetimeFormatter(0, 0, 0, 0, 0, 0, "YYYY-MM-DD HH:mm:ss", "America/New_York") }}
 ```
 Expected: `2025-01-15 09:30:45`
+
+#### Format Unix timestamp (seconds)
+```
+{{ datetimeFormatter(0, 0, 0, 0, 0, 0, "YYYY-MM-DD HH:mm:ss", "UTC", 1700000000) }}
+```
+
+#### Format Unix timestamp (milliseconds)
+```
+{{ datetimeFormatter(0, 0, 0, 0, 0, 0, "YYYY-MM-DD HH:mm:ss", "UTC", 1700000000000) }}
+```
+
+#### Format ISO string input
+```
+{{ datetimeFormatter(0, 0, 0, 0, 0, 0, "YYYY-MM-DD HH:mm:ss", "Europe/London", "2024-01-01T00:00:00Z") }}
+```
 
 ## Automated Testing
 

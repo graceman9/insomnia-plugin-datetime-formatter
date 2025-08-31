@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Simple test script for the DateTime Add plugin
- * This script tests the plugin functionality without Insomnia
+ * Simple test script for the DateTime Formatter plugin
+ * Tests formatting timestamps and current time with offsets/timezones without Insomnia
  */
 
 // Mock Insomnia context
@@ -46,6 +46,18 @@ async function testPlugin() {
     {
       name: 'Complex: Add 2 days, 3 hours, 15 minutes',
       args: [0, 0, 2, 3, 15, 0, 'YYYY-MM-DD HH:mm:ss', 'UTC']
+    },
+    {
+      name: 'Format Unix timestamp (seconds)',
+      args: [0, 0, 0, 0, 0, 0, 'YYYY-MM-DD HH:mm:ss', 'UTC', 1700000000]
+    },
+    {
+      name: 'Format Unix timestamp (milliseconds)',
+      args: [0, 0, 0, 0, 0, 0, 'YYYY-MM-DD HH:mm:ss', 'UTC', 1700000000000]
+    },
+    {
+      name: 'Format ISO string',
+      args: [0, 0, 0, 0, 0, 0, 'YYYY-MM-DD HH:mm:ss', 'Europe/London', '2024-01-01T00:00:00Z']
     }
   ];
 
@@ -57,6 +69,9 @@ async function testPlugin() {
       console.log(`✅ ${testCase.name}:`);
       console.log(`   Result: ${result}`);
       console.log(`   Format: ${testCase.args[6]}`);
+      if (testCase.args.length >= 9) {
+        console.log(`   Input: ${testCase.args[8]}`);
+      }
       console.log('');
     } catch (error) {
       console.log(`❌ ${testCase.name}:`);

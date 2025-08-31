@@ -1,14 +1,14 @@
 const moment = require('moment-timezone');
 
 /**
- * Insomnia Plugin: DateTime Add
- * Allows adding/subtracting time units to current datetime and formatting the result
+ * Insomnia Plugin: DateTime Formatter
+ * Formats timestamps or current datetime with optional offsets and timezone
  */
 module.exports = {
   templateTags: [{
     name: 'datetimeFormatter',
     displayName: 'DateTime Formatter',
-    description: 'Format current datetime with optional offsets and timezone',
+    description: 'Format timestamps or current datetime with optional offsets and timezone',
     args: [
       {
         displayName: 'Years',
@@ -57,13 +57,36 @@ module.exports = {
         description: 'Timezone for the output (e.g., UTC, America/New_York)',
         type: 'string',
         defaultValue: 'UTC'
+      },
+      {
+        displayName: 'Input (timestamp/date, optional)',
+        description: 'Unix seconds, Unix ms, ISO 8601, or any parseable date string. Leave empty to use current time.',
+        type: 'string',
+        defaultValue: ''
       }
     ],
-    async run(context, years = 0, months = 0, days = 0, hours = 0, minutes = 0, seconds = 0, format = 'YYYY-MM-DD HH:mm:ss', timezone = 'UTC') {
+    async run(context, years = 0, months = 0, days = 0, hours = 0, minutes = 0, seconds = 0, format = 'YYYY-MM-DD HH:mm:ss', timezone = 'UTC', input = '') {
       try {
         // Initialize datetime with timezone (default UTC)
         const tz = timezone || 'UTC';
-        let date = moment().tz(tz);
+        let date;
+
+        const hasInput = input !== undefined && input !== null && String(input).trim() !== '';
+        if (hasInput) {
+          const raw = String(input).trim();
+          if (/^\d{13}$/.test(raw)) {
+            // Unix ms
+            date = moment.tz(parseInt(raw, 10), tz);
+          } else if (/^\d{10}$/.test(raw)) {
+            // Unix seconds
+            date = moment.unix(parseInt(raw, 10)).tz(tz);
+          } else {
+            // ISO or generic date string
+            date = moment.tz(raw, tz);
+          }
+        } else {
+          date = moment().tz(tz);
+        }
 
         // Add/subtract time units
         date = date.add({
@@ -78,7 +101,7 @@ module.exports = {
         // Format the result
         return date.format(format);
       } catch (error) {
-        console.error('DateTime Add Plugin Error:', error);
+        console.error('[DateTime Formatter] Error:', error);
         return `Error: ${error.message}`;
       }
     }

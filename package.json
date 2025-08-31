@@ -25,7 +25,7 @@
   "insomnia": {
     "name": "datetime-formatter",
     "displayName": "DateTime Formatter",
-    "description": "Format current date/time with optional offsets (years, months, days, hours, minutes, seconds) and timezone",
+    "description": "Format timestamps (Unix seconds/ms, ISO) or current date/time with optional offsets (years, months, days, hours, minutes, seconds) and timezone",
     "images": {
       "icon": "icon.svg"
     },

@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/insomnia-plugin-datetime-formatter.svg)](https://badge.fury.io/js/insomnia-plugin-datetime-formatter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-An Insomnia plugin to format current date/time with optional offsets and timezone using Moment.js Timezone.
+An Insomnia plugin to format timestamps (Unix seconds/ms, ISO) or current date/time with optional offsets and timezone using Moment.js Timezone.
 
 ## 🚀 Features
 
@@ -55,6 +55,7 @@ npm install insomnia-plugin-datetime-formatter
 | **Seconds** | Number | 0 | Number of seconds to add/subtract |
 | **Format** | String | `YYYY-MM-DD HH:mm:ss` | Moment.js format string |
 | **Timezone** | String | `UTC` | Timezone for output |
+| **Input (timestamp/date)** | String | `` (empty) | Unix seconds, Unix ms, ISO 8601, or parseable date string. Empty = now |
 
 ### Examples
 
@@ -93,6 +94,21 @@ Output: `2025-01-15 09:30:45`
 {{ datetimeFormatter(0, 0, 7, 0, 0, 0, "YYYY-MM-DDTHH:mm:ssZ") }}
 ```
 Output: `2025-01-22T14:30:45+00:00`
+
+#### Format a Unix timestamp (seconds)
+```
+{{ datetimeFormatter(0, 0, 0, 0, 0, 0, "YYYY-MM-DD HH:mm:ss", "UTC", 1700000000) }}
+```
+
+#### Format a Unix timestamp (milliseconds)
+```
+{{ datetimeFormatter(0, 0, 0, 0, 0, 0, "YYYY-MM-DD HH:mm:ss", "UTC", 1700000000000) }}
+```
+
+#### Format an ISO string
+```
+{{ datetimeFormatter(0, 0, 0, 0, 0, 0, "YYYY-MM-DD HH:mm:ss", "Europe/London", "2024-01-01T00:00:00Z") }}
+```
 
 ## 📋 Moment.js Format Reference
 
